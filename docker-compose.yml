@@ -1,0 +1,22 @@
+services:
+  app:
+    image: neosmemo/memos:0.15.2
+    restart: always
+    volumes:
+      - data:/var/opt/memos
+    environment:
+      - VIRTUAL_HOST
+      - VIRTUAL_PORT=5230
+      - LETSENCRYPT_HOST
+      - LETSENCRYPT_EMAIL
+    networks:
+      - default
+      - proxy
+
+volumes:
+  data:
+
+networks:
+  proxy:
+    name: nginx-proxy
+    external: true
